@@ -1,1 +1,1 @@
-web: python repeat.py
+web: python main.py
