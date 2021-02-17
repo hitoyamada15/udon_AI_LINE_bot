@@ -13,7 +13,8 @@ from linebot.models import (MessageEvent, TextMessage, TextSendMessage, ImageMes
 import tensorflow as tf
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
-model = load_model("resnet50_imagenet.h5")
+#model = load_model("resnet50_imagenet.h5")
+model = load_model('ResNet_24.h5')
 
 import pandas as pd
 
@@ -26,11 +27,11 @@ imagenet_classnames = json.load(json_open)
 
 app = Flask(__name__)
 
-ACCESS_TOKEN = "funnwkyG6dVjtWrCBlEJNd8vzh4I2L/35FthW4SI1Fpc+ocLRl+h8/xu9MyzjlpdEGDNjnZGJ5O/BYZUeGTmioKLjnL5K/pIadduCoThujr3ORGqtgMM0J7pfpA6MV5FrUntqHVY/tsXKyeJu5YZ2wdB04t89/1O/w1cDnyilFU="
-SECRET = "115282a59614943423975ca52779a2a6"
+ACCESS_TOKEN = "24QFNRt3i4epHxJnNM0CGrYWw5urUHCpakXidNgO0Ncmd/DSDmr9HoUjZXjfuLqTZlcoGGv6RoTlZJ/IcJKGg2dAQV9AKIBAOM4RfGFxFHFZATltQEfCHU0h6ZjBXzIXQ0A1kZgWaZmUC4raSJ3LFwdB04t89/1O/w1cDnyilFU="
+SECRET = "40f68488d5215bd1e09aa7f7faa01588"
 
-FQDN = "https://cats-vs-dogs-line-bot-naoya.herokuapp.com/callback"
-
+#FQDN = "https://cats-vs-dogs-line-bot-naoya.herokuapp.com/callback"
+FQDN = "https://boar-catcher.herokuapp.com/callback"
 
 line_bot_api = LineBotApi(ACCESS_TOKEN)
 handler = WebhookHandler(SECRET)
@@ -60,40 +61,45 @@ def handle_image_message(event):
 
         test_url = "./static/"+event.message.id+".jpg"
 
-        img = image.load_img(test_url, target_size=(224, 224)) # read image as PIL data
+        #img = image.load_img(test_url, target_size=(224, 224)) # read image as PIL data
+        img = image.load_img(test_url, target_size=(160, 160)) # read image as PIL data
         x = image.img_to_array(img) # convert PIL data to Numpy Array
         x = np.expand_dims(x, axis=0)
-        #x = x / 255.0
-        # モデルのロード
+        x = x / 255.0
+
         try:
-            #model = load_model('dog_cat.h5')
-            #model = load_model('dogs_vs_cats_model_combo.h5')
-
             predict = model.predict(x).flatten()
-            #text = str(float(predict[0]))
 
-            #cat_score = str(round(float(predict[0]), 3)*100)
-            #dog_score = str(round(float(predict[1]), 3)*100)
+            #cat_score = predict[0]*100
+            #dog_score = predict[1]*100
 
-            #classnames = ["ねこ", "いぬ"]
-            #index = np.argmax(predict)
-            #label = classnames[index]
+            classnames = ["000_suzaki-shokuryohinten_mitoyo", "001_gamou_sakaide",
+                          "002_nagata-in-kanoka_zentsuji","003_hinode-seimenjo_sakaide",
+                          "004_tamura_ayagawa","005_setobare_takamatsu",
+                          "006_hayuka_ayagawa","007_ippuku_takamatsu","008_tanigawa-beikokuten_mannou",
+                          "009_mugizou_takamatsu","010_miyoshi-udon_mitoyo","011_ookura_takamatsu",
+                          "012_yamagoe_ayagawa","013_okasen_utazu",
+                          "014_nakamura-udon_marugame","015_yoshiya_marugame",
+                          "016_kamakiri_kanonji","017_joto_kanonji",
+                          "018_nekko_tadotsu","019_yamadaya_takamatsu"]
+            index = np.argmax(predict)
+            label = classnames[index]
 
             #text = f"cat = {cat_score}\ndog = {dog_score}"
-            #text = f"これは{label}です。\nねこ確率{cat_score}%\nいぬ確率{dog_score}%"
+            text = f"このうどんは{label}です。"
             
-            df = pd.DataFrame()
-            df["index"] = np.arange(1000)
-            df["predict"] = predict
-            df = df.sort_values("predict", ascending=False)
+            #df = pd.DataFrame()
+            #df["index"] = np.arange(1000)
+            #df["predict"] = predict
+            #df = df.sort_values("predict", ascending=False)
 
-            text = "これは\n"
-            for i in range(5):
-                label = imagenet_classnames[df.index[i]]
-                label_ja = label["ja"]
-                conf = df.iloc[i, 1]*100
-                text += f"  {label_ja} {conf:.1f}%\n"
-            text += "です。"
+            #text = "これは\n"
+            #for i in range(5):
+            #    label = imagenet_classnames[df.index[i]]
+            #    label_ja = label["ja"]
+            #    conf = df.iloc[i, 1]*100
+            #    text += f"  {label_ja} {conf:.1f}%\n"
+            #text += "です。"
 
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=text))
 
@@ -106,3 +112,6 @@ def handle_image_message(event):
 
 if __name__ == "__main__":
     app.run()
+
+
+
