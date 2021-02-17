@@ -27,8 +27,8 @@ imagenet_classnames = json.load(json_open)
 
 app = Flask(__name__)
 
-ACCESS_TOKEN = "24QFNRt3i4epHxJnNM0CGrYWw5urUHCpakXidNgO0Ncmd/DSDmr9HoUjZXjfuLqTZlcoGGv6RoTlZJ/IcJKGg2dAQV9AKIBAOM4RfGFxFHFZATltQEfCHU0h6ZjBXzIXQ0A1kZgWaZmUC4raSJ3LFwdB04t89/1O/w1cDnyilFU="
-SECRET = "40f68488d5215bd1e09aa7f7faa01588"
+ACCESS_TOKEN = "VzJxMa7DiVPzf3Z1y9+4OOIDBmRzhCdE3DHy/rkjGoSjoYhujyNxYLPOlji+uBgPZlcoGGv6RoTlZJ/IcJKGg2dAQV9AKIBAOM4RfGFxFHFq7g/IgS3WbMUCZz+/gv1IiZNhOTIHuJMpVquPWEv6NQdB04t89/1O/w1cDnyilFU="
+SECRET = "4b4400f6e9a2fe31bb19fb5525b73d58"
 
 #FQDN = "https://cats-vs-dogs-line-bot-naoya.herokuapp.com/callback"
 FQDN = "https://udon-ai-bot.herokuapp.com/callback"
