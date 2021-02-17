@@ -31,7 +31,7 @@ ACCESS_TOKEN = "24QFNRt3i4epHxJnNM0CGrYWw5urUHCpakXidNgO0Ncmd/DSDmr9HoUjZXjfuLqT
 SECRET = "40f68488d5215bd1e09aa7f7faa01588"
 
 #FQDN = "https://cats-vs-dogs-line-bot-naoya.herokuapp.com/callback"
-FQDN = "https://boar-catcher.herokuapp.com/callback"
+FQDN = "https://udon-ai-bot.herokuapp.com/callback"
 
 line_bot_api = LineBotApi(ACCESS_TOKEN)
 handler = WebhookHandler(SECRET)
