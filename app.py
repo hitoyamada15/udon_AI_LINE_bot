@@ -86,7 +86,7 @@ def handle_image_message(event):
             label = classnames[index]
 
             #text = f"cat = {cat_score}\ndog = {dog_score}"
-            text = f"このうどんは{label}です。"
+            text = "このうどんはlabelです。"
             
             #df = pd.DataFrame()
             #df["index"] = np.arange(1000)
