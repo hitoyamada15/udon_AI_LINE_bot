@@ -14,16 +14,10 @@ import tensorflow as tf
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 #model = load_model("resnet50_imagenet.h5")
-model = load_model('ResNet_24.h5')
+model = load_model('ResNet_32.h5')
 
 import pandas as pd
-
-
-import json
-json_open = open("imagenet_class_index.json", 'r')
-imagenet_classnames = json.load(json_open)
-
-
+import os
 
 app = Flask(__name__)
 
@@ -49,17 +43,16 @@ def callback():
 
     return'OK'
 
-
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image_message(event):
     message_content = line_bot_api.get_message_content(event.message.id)
 
     # 取得した画像ファイル
-    with open("static/"+event.message.id+".jpg", "wb") as f:
+    with open("data/"+event.message.id+".jpg", "wb") as f:
         f.write(message_content.content)
         
 
-        test_url = "./static/"+event.message.id+".jpg"
+        test_url = "./data/"+event.message.id+".jpg"
 
         #img = image.load_img(test_url, target_size=(224, 224)) # read image as PIL data
         img = image.load_img(test_url, target_size=(160, 160)) # read image as PIL data
@@ -67,11 +60,10 @@ def handle_image_message(event):
         x = np.expand_dims(x, axis=0)
         x = x / 255.0
 
+        # モデルのロード
         try:
-            predict = model.predict(x).flatten()
 
-            #cat_score = predict[0]*100
-            #dog_score = predict[1]*100
+            predict = model.predict(x).flatten()
 
             classnames = ["000_suzaki-shokuryohinten_mitoyo", "001_gamou_sakaide",
                           "002_nagata-in-kanoka_zentsuji","003_hinode-seimenjo_sakaide",
@@ -86,22 +78,8 @@ def handle_image_message(event):
             label = classnames[index]
 
             #text = f"cat = {cat_score}\ndog = {dog_score}"
-            text = "このうどんはlabelです。"
-            
-            #df = pd.DataFrame()
-            #df["index"] = np.arange(1000)
-            #df["predict"] = predict
-            #df = df.sort_values("predict", ascending=False)
 
-            #text = "これは\n"
-            #for i in range(5):
-            #    label = imagenet_classnames[df.index[i]]
-            #    label_ja = label["ja"]
-            #    conf = df.iloc[i, 1]*100
-            #    text += f"  {label_ja} {conf:.1f}%\n"
-            #text += "です。"
-
-            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=text))
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=label))
 
         except:
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text="failed"))
@@ -111,7 +89,4 @@ def handle_image_message(event):
         
 
 if __name__ == "__main__":
-    app.run()
-
-
-
+    app.run()    
