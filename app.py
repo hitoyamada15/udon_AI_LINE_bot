@@ -13,9 +13,10 @@ from linebot.models import (MessageEvent, TextMessage, TextSendMessage, ImageMes
 import tensorflow as tf
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
+"""
 #model = load_model("resnet50_imagenet.h5")
 #model = load_model("efficientnet_No20.h5")
-model = load_model("ResNet_32.h5")
+model = load_model('ResNet_32.h5')
 
 import pandas as pd
 import os
@@ -69,39 +70,7 @@ def handle_image_message(event):
         try:
 
             predict = model.predict(x).flatten()
-            """
-            suzaki_score = predict[0]*100
-            gamou_score = predict[1]*100
-            nagata_score = predict[2]*100
-            hinode_score = predict[3]*100
-            tamura_score = predict[4]*100
-            setobare_score = predict[5]*100
-            hayuka_score = predict[6]*100
-            ippuku_score = predict[7]*100
-            tanigawa_score = predict[8]*100
-            mugizou_score = predict[9]*100
-            miyoshi_score = predict[10]*100
-            ookura_score = predict[11]*100
-            yamagoe_score = predict[12]*100
-            okasen_score = predict[13]*100
-            nakamura_score = predict[14]*100
-            yoshiya_score = predict[15]*100
-            kamakiri_score = predict[16]*100
-            joto_score = predict[17]*100
-            nekko_score = predict[18]*100
-            yamadaya_score = predict[19]*100
-            """
-            """
-            classnames = ["000_suzaki-shokuryohinten_mitoyo", "001_gamou_sakaide",
-                          "002_nagata-in-kanoka_zentsuji","003_hinode-seimenjo_sakaide",
-                          "004_tamura_ayagawa","005_setobare_takamatsu",
-                          "006_hayuka_ayagawa","007_ippuku_takamatsu","008_tanigawa-beikokuten_mannou",
-                          "009_mugizou_takamatsu","010_miyoshi-udon_mitoyo","011_ookura_takamatsu",
-                          "012_yamagoe_ayagawa","013_okasen_utazu",
-                          "014_nakamura-udon_marugame","015_yoshiya_marugame",
-                          "016_kamakiri_kanonji","017_joto_kanonji",
-                          "018_nekko_tadotsu","019_yamadaya_takamatsu"]
-            """
+
 
             classnames = ["000-須崎食料品店", "001-讃岐うどん がもう",
                           "002-釜あげうどん 長田 in 香の香","003-日の出製麺所",
@@ -132,3 +101,16 @@ def handle_image_message(event):
 
 if __name__ == "__main__":
     app.run()    
+"""
+
+"""
+classnames = ["000_suzaki-shokuryohinten_mitoyo", "001_gamou_sakaide",
+             "002_nagata-in-kanoka_zentsuji","003_hinode-seimenjo_sakaide",
+             "004_tamura_ayagawa","005_setobare_takamatsu",
+             "006_hayuka_ayagawa","007_ippuku_takamatsu","008_tanigawa-beikokuten_mannou",
+             "009_mugizou_takamatsu","010_miyoshi-udon_mitoyo","011_ookura_takamatsu",
+             "012_yamagoe_ayagawa","013_okasen_utazu",
+             014_nakamura-udon_marugame","015_yoshiya_marugame",
+             "016_kamakiri_kanonji","017_joto_kanonji",
+             "018_nekko_tadotsu","019_yamadaya_takamatsu"]
+"""
