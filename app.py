@@ -19,7 +19,10 @@ from tensorflow.keras.preprocessing import image
 print(os.listdir(os.getcwd()))
 print(os.path.exists("efficientnet_No20.h5"))
 
-model = load_model('./efficientnet_No20.h5')
+filepath = os.path.join(os.getcwd(), "efficientnet_No20.h5")
+model = load_model(filepath)
+
+#model = load_model('./efficientnet_No20.h5')
 
 
 
