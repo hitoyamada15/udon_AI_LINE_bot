@@ -17,6 +17,7 @@ from tensorflow.keras.preprocessing import image
 #model = load_model("resnet50_imagenet.h5")
 
 print(os.listdir(os.getcwd()))
+print(os.path.exists("efficientnet_No20.h5")
 
 model = load_model('./efficientnet_No20.h5')
 
