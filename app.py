@@ -13,9 +13,7 @@ from linebot.models import (MessageEvent, TextMessage, TextSendMessage, ImageMes
 import tensorflow as tf
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
-"""
 #model = load_model("resnet50_imagenet.h5")
-#model = load_model("efficientnet_No20.h5")
 model = load_model('ResNet_32.h5')
 
 import pandas as pd
@@ -101,7 +99,7 @@ def handle_image_message(event):
 
 if __name__ == "__main__":
     app.run()    
-"""
+
 
 """
 classnames = ["000_suzaki-shokuryohinten_mitoyo", "001_gamou_sakaide",
