@@ -21,8 +21,8 @@ import os
 
 app = Flask(__name__)
 
-ACCESS_TOKEN = "VzJxMa7DiVPzf3Z1y9+4OOIDBmRzhCdE3DHy/rkjGoSjoYhujyNxYLPOlji+uBgPZlcoGGv6RoTlZJ/IcJKGg2dAQV9AKIBAOM4RfGFxFHFq7g/IgS3WbMUCZz+/gv1IiZNhOTIHuJMpVquPWEv6NQdB04t89/1O/w1cDnyilFU="
-SECRET = "4b4400f6e9a2fe31bb19fb5525b73d58"
+ACCESS_TOKEN = "hxEb3PloXtO5q6a6GqOe1kWQ3JS0XBXMmK4mfsYp4xNlv1t+1+wzcLW0FwzJIsFopvyJDHwZfucsKxXl3fowhxwRDVoq1HLODk5H2y0aCxGyqdjpyGXIrGhK4b8ob0+HY8L9K5wCXi+XBvJY9gWYDAdB04t89/1O/w1cDnyilFU="
+SECRET = "7f0e922c0607c866eef5f498d6af68d4"
 
 #FQDN = "https://cats-vs-dogs-line-bot-naoya.herokuapp.com/callback"
 FQDN = "https://udon-ai-bot.herokuapp.com/callback"
@@ -59,7 +59,7 @@ def handle_image_message(event):
         test_url = "./data/"+event.message.id+".jpg"
 
         #img = image.load_img(test_url, target_size=(224, 224)) # read image as PIL data
-        img = image.load_img(test_url, target_size=(160, 160)) # read image as PIL data
+        img = image.load_img(test_url, target_size=(260, 260)) # read image as PIL data
         x = image.img_to_array(img) # convert PIL data to Numpy Array
         x = np.expand_dims(x, axis=0)
         x = x / 255.0
