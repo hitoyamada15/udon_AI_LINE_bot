@@ -15,6 +15,7 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 #model = load_model("resnet50_imagenet.h5")
 model = load_model("efficientnet_No20.h5")
+model = load_model("ResNet_32.h5")
 
 import pandas as pd
 import os
@@ -59,7 +60,7 @@ def handle_image_message(event):
         test_url = "./data/"+event.message.id+".jpg"
 
         #img = image.load_img(test_url, target_size=(224, 224)) # read image as PIL data
-        img = image.load_img(test_url, target_size=(260, 260)) # read image as PIL data
+        img = image.load_img(test_url, target_size=(160, 160)) # read image as PIL data
         x = image.img_to_array(img) # convert PIL data to Numpy Array
         x = np.expand_dims(x, axis=0)
         x = x / 255.0
